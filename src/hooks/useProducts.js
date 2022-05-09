@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const useProducts = () => {
     const [gpus, setGpus] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/gpu')
+        fetch('https://sheltered-hollows-42967.herokuapp.com/gpu')
             .then(res => res.json())
             .then(data => setGpus(data))
     }, [])
