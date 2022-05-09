@@ -18,7 +18,7 @@ const AddProducts = () => {
         const product = { email, name, price, quantity, sold, info, supplier, image }
 
         const addProductToDB = async () => {
-            await axios.post(`http://localhost:5000/gpu`, product)
+            await axios.post(`https://sheltered-hollows-42967.herokuapp.com/gpu`, product)
                 .then(res => {
                     const { data } = res;
                     if (data.insertedId) {

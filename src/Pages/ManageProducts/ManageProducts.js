@@ -8,12 +8,16 @@ import Product from '../Shared/Product/Product';
 const ManageProducts = () => {
     const [products, setProducts] = useProducts();
     const navigate = useNavigate();
-    const deleteGpu = (id) => {
-        axios.delete(`https://sheltered-hollows-42967.herokuapp.com/${id}`,)
-            .then(res => {
-                const newGpus = products.filter(product => product._id !== id);
-                setProducts(newGpus);
-            })
+    const deleteGpu = ([id, name]) => {
+        const proceed = window.confirm(`Are you sure to delete "${name}"?`);
+        if (proceed) {
+            axios.delete(`https://sheltered-hollows-42967.herokuapp.com/gpu/${id}`,)
+                .then(res => {
+                    const newGpus = products.filter(product => product._id !== id);
+                    setProducts(newGpus);
+                })
+        }
+
 
     }
     return (
@@ -27,7 +31,7 @@ const ManageProducts = () => {
                                 gpu={gpu}>
                                 {
                                     (<Button variant='outline-danger'
-                                        onClick={() => deleteGpu(gpu._id)}>Delete</Button>)
+                                        onClick={() => deleteGpu([gpu._id, gpu.name])}>Delete</Button>)
                                 }
                             </Product></Col>)
                     }
