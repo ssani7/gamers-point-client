@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FloatingLabel, Form } from 'react-bootstrap';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import auth from '../../../firebase.init';
+import Loading from '../../Shared/Loading/Loading';
 
 const PassLogin = () => {
+    const [noMatch, setNoMatch] = useState('')
     const [
         createUserWithEmailAndPassword,
         user,
@@ -11,9 +13,19 @@ const PassLogin = () => {
         error
     ] = useCreateUserWithEmailAndPassword(auth)
 
+
+
     const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(e.target.email.value)
+        e.preventDefault();
+
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        const confirm = e.target.confirm.value;
+        if (password === confirm) {
+            createUserWithEmailAndPassword(email, password)
+        } else {
+            setNoMatch("Passwords do not match")
+        }
     }
     return (
         <div className='w-50 mx-auto text-center mt-5'>
@@ -25,11 +37,18 @@ const PassLogin = () => {
                 >
                     <Form.Control type="email" placeholder="name@example.com" name='email' />
                 </FloatingLabel>
-                <FloatingLabel controlId="floatingPassword" label="Password">
+                <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
                     <Form.Control type="password" placeholder="Password" name='password' />
                 </FloatingLabel>
-                <input className='w-50 mt-3 btn btn-outline-dark' type="submit" value="Sign In" />
+                <FloatingLabel controlId="floatingPassword" label="Confirm Password">
+                    <Form.Control type="password" placeholder="Password" name='confirm' />
+                </FloatingLabel>
+                {
+                    loading ? <Loading></Loading> : <input className='w-50 mt-3 btn btn-outline-dark' type="submit" value="Sign In" />
+                }
+
             </form>
+            <p className='text-danger'>{error?.message} {noMatch}</p>
         </div>
     );
 };

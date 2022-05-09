@@ -1,8 +1,18 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../../firebase.init';
 
 const Header = () => {
+    const [user] = useAuthState(auth);
+    const handleSignOut = () => {
+        const proceed = window.confirm("Are sure to log out?")
+        if (proceed) {
+            signOut(auth)
+        }
+    }
     return (
         <div>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -12,20 +22,30 @@ const Header = () => {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link as={Link} to='/products/all'>Inventory</Nav.Link>
-                            <Nav.Link href="#pricing">Pricing</Nav.Link>
-                            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                            </NavDropdown>
                         </Nav>
                         <Nav>
-                            <Nav.Link href="#deets">More deets</Nav.Link>
-                            <Nav.Link as={Link} to='/login'>
-                                Sign In
-                            </Nav.Link>
+                            {
+                                user ? <>
+                                    <Nav.Link as={Link} to='/manageProducts'>
+                                        Manage Inventory
+                                    </Nav.Link>
+                                    <Nav.Link as={Link} to='/addProducts'>
+                                        Add Products
+                                    </Nav.Link>
+                                    <Nav.Link as={Link} to='/myProducts'>
+                                        My Products
+                                    </Nav.Link>
+                                    <Nav.Link onClick={handleSignOut}>
+                                        Sign out
+                                    </Nav.Link>
+                                </> :
+                                    <>
+                                        <Nav.Link as={Link} to='/register'>
+                                            Sign In
+                                        </Nav.Link>
+                                    </>
+                            }
+
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
