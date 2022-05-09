@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FloatingLabel, Form } from 'react-bootstrap';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
+import { Link } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
 
@@ -48,6 +49,7 @@ const PassLogin = () => {
                 }
 
             </form>
+            <p>Already have an account? <Link to='/login'>Log in</Link></p>
             <p className='text-danger'>{error?.message} {noMatch}</p>
         </div>
     );

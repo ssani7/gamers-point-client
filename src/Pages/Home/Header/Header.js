@@ -40,7 +40,7 @@ const Header = () => {
                                     </Nav.Link>
                                 </> :
                                     <>
-                                        <Nav.Link as={Link} to='/register'>
+                                        <Nav.Link as={Link} to='/login'>
                                             Sign In
                                         </Nav.Link>
                                     </>
