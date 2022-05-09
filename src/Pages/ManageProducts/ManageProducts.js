@@ -9,7 +9,7 @@ const ManageProducts = () => {
     const [products, setProducts] = useProducts();
     const navigate = useNavigate();
     const deleteGpu = (id) => {
-        axios.delete(`http://localhost:5000/gpu/${id}`,)
+        axios.delete(`https://sheltered-hollows-42967.herokuapp.com/${id}`,)
             .then(res => {
                 const newGpus = products.filter(product => product._id !== id);
                 setProducts(newGpus);

@@ -13,7 +13,7 @@ const Productdetails = () => {
     const [currentSold, setCurrentSold] = useState(0);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/gpu/${id}`)
+        fetch(`https://sheltered-hollows-42967.herokuapp.com/gpu/${id}`)
             .then(res => res.json())
             .then(data => {
                 setGpu(data)
@@ -32,7 +32,7 @@ const Productdetails = () => {
 
         const updatedGpu = { quantity: newQuantity, sold: newSold };
 
-        fetch(`http://localhost:5000/deliver/${id}`, {
+        fetch(`https://sheltered-hollows-42967.herokuapp.com/deliver/${id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json",
@@ -51,7 +51,7 @@ const Productdetails = () => {
         const updatedGpu = { quantity: newQuantity };
         setCurrentQuantity(newQuantity);
 
-        fetch(`http://localhost:5000/restock/${id}`, {
+        fetch(`https://sheltered-hollows-42967.herokuapp.com/restock/${id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json",

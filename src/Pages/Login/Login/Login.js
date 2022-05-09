@@ -1,12 +1,14 @@
 import React from 'react';
 import { FloatingLabel, Form } from 'react-bootstrap';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
-import PassLogin from '../PassLogin/PassLogin';
 
 const Login = () => {
+    let location = useLocation();
+    const navigate = useNavigate();
+    let from = location.state?.from?.pathname || "/";
     const [
         signInWithEmailAndPassword,
         user,
@@ -14,12 +16,16 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
-    const handleSubmit = (e) => {
+    if (user) {
+        navigate(from, { replace: true });
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        signInWithEmailAndPassword(email, password);
-
+        await signInWithEmailAndPassword(email, password);
+        navigate(from, { replace: true });
     }
     return (
         <div className='w-50 mx-auto text-center mt-5'>

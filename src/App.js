@@ -32,7 +32,11 @@ function App() {
             <AddProducts></AddProducts>
           </RequireAuth>}>
         </Route>
-        <Route path='/inventory/:id' element={<Productdetails></Productdetails>}></Route>
+        <Route path='/inventory/:id' element={
+          <RequireAuth>
+            <Productdetails></Productdetails>
+          </RequireAuth>}>
+        </Route>
       </Routes>
       <ToastContainer />
     </div>
