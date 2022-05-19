@@ -15,16 +15,12 @@ function RequireAuth({ children }) {
     }
 
     if (!user) {
-        // Redirect them to the /login page, but save the current location they were
-        // trying to go to when they were redirected. This allows us to send them
-        // along to that page after they login, which is a nicer user experience
-        // than dropping them off on the home page.
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
 
     if (user?.providerData[0]?.providerId === "password" && !user?.emailVerified) {
         return <div className="text-center my-5">
-            <h2 className="my-5">Please Verify Email {user.email}</h2>
+            <h2 className="my-5">Please Verify Email {user.email} and refresh the page</h2>
             <Button
                 onClick={async () => {
                     await sendEmailVerification();

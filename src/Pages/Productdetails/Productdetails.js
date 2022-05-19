@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Loading from '../Shared/Loading/Loading';
 import './Productdetails.css'
 
@@ -21,7 +22,11 @@ const Productdetails = () => {
                 setCurrentSold(data.sold)
                 setLoading(false)
             })
-    }, [])
+    }, [id])
+
+    if (loading) {
+        return <Loading></Loading>
+    }
 
     const handleDelivered = () => {
         const newSold = currentSold + 1;
@@ -47,51 +52,54 @@ const Productdetails = () => {
 
     const handleAdd = (e) => {
         e.preventDefault();
-        const newQuantity = currentQuantity + parseInt(e.target.add.value);
+        const toAdd = parseInt(e.target.add.value);
+        const newQuantity = currentQuantity + toAdd;
         const updatedGpu = { quantity: newQuantity };
-        setCurrentQuantity(newQuantity);
 
-        fetch(`https://sheltered-hollows-42967.herokuapp.com/restock/${id}`, {
-            method: "PUT",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify(updatedGpu),
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                e.target.reset()
+        if (toAdd > 0) {
+            setCurrentQuantity(newQuantity);
+
+            fetch(`https://sheltered-hollows-42967.herokuapp.com/restock/${id}`, {
+                method: "PUT",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify(updatedGpu),
             })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    e.target.reset()
+                })
+        }
+        else {
+            toast.warn('Please input a valid number to add')
+        }
+
     }
     return (
-        <div>
-            {
-                loading ? <Loading></Loading> : (
-                    <div className='mx-5 d-flex align-items-center justify-content-center'>
-                        <img className='w-50' src={image} alt="" />
-                        <div className='w-50 product-info'>
-                            <h1>{name}</h1>
-                            <p><b>ProductId: </b> {_id}</p>
-                            <p><b>Price: </b> {price?.toLocaleString('en-IN', { style: 'currency', currency: 'BDT', minimumFractionDigits: 2 })}</p>
-                            <p><b>Quantity: </b> {currentQuantity}</p>
-                            <p><b>Sold: </b> {currentSold}</p>
-                            <p><b>Overview: </b> {info}</p>
-                            <p><b>Supplier: </b> {supplier}</p>
-                            <button onClick={handleDelivered}>Delivered</button>
-                            <form className='my-3' onSubmit={handleAdd}>
-                                <label className='me-2' htmlFor="add">Restock the Items</label>
-                                <input name='add' type="number" />
-                                <input type="submit" value="Add" />
-                            </form>
-                            <Link to='/manageProducts'>
-                                <Button variant='outline-dark'>Manage Inventory</Button>
-                            </Link>
-                        </div>
-                    </div>)
-            }
+        <div className='mx-5 d-flex flex-column flex-lg-row align-items-center justify-content-center '>
+            <img className='w-100' src={image} alt="" />
+            <div className='w-100 product-info'>
+                <h1 className='boldPoppins'>{name}</h1>
+                <p><b>ProductId: </b> {_id}</p>
+                <p><b>Price: </b> {price?.toLocaleString('en-IN', { style: 'currency', currency: 'BDT', minimumFractionDigits: 2 })}</p>
+                <p><b>Quantity: </b> {currentQuantity}</p>
+                <p><b>Sold: </b> {currentSold}</p>
+                <p><b>Overview: </b> <span className='poppins'>{info}</span></p>
+                <p><b>Supplier: </b> {supplier}</p>
+                <Button variant='outline-dark mb-3' onClick={handleDelivered}>Delivered</Button>
+                <form onSubmit={handleAdd} className='d-flex align-items-center mb-3'>
+                    <input name='add' type="number" className="form-control d-inline" placeholder="Restock Items" aria-label="Restock Items" aria-describedby="button-addon2" />
+                    <input className="btn btn-outline-dark" type="submit" value="Add Items" id="button-addon2" />
+                </form>
+                <Link to='/manageProducts'>
+                    <Button variant='outline-dark'>Manage Inventory</Button>
+                </Link>
+            </div>
         </div>
     );
 };
 
 export default Productdetails;
+

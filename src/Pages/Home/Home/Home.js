@@ -15,7 +15,6 @@ const Home = () => {
                 <button onClick={() => navigate('/products/all')} className='btn btn-outline-dark my-4 mx-auto'>Show All</button>
                 <button onClick={() => navigate('/manageProducts')} className='btn btn-outline-dark mb-4 mx-auto'>Manage Inventory</button>
             </div>
-
             <Footer></Footer>
         </div>
     );

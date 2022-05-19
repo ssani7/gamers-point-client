@@ -15,9 +15,6 @@ const Banner = () => {
                         src={banner1}
                         alt="First slide"
                     />
-                    <Carousel.Caption>
-                        <h3>The best Graphics cards of 2022</h3>
-                    </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
@@ -25,10 +22,6 @@ const Banner = () => {
                         src={banner2}
                         alt="Second slide"
                     />
-
-                    <Carousel.Caption>
-                        <h3>Unleash the Gamer in you</h3>
-                    </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
@@ -36,10 +29,6 @@ const Banner = () => {
                         src={banner3}
                         alt="Third slide"
                     />
-
-                    <Carousel.Caption>
-                        <h3>The best gaming graphics card of  MSI gaming</h3>
-                    </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
         </div>
