@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './product.css'
 
 const Product = ({ gpu, children }) => {
-    const { _id, image, name, info, price, quantity, supplier, sold } = gpu;
+    const { _id, image, name, info, price, quantity, supplier, sold, email } = gpu;
     const navigate = useNavigate();
     return (
         <Card className='h-100'>
@@ -23,6 +23,7 @@ const Product = ({ gpu, children }) => {
                     {info?.length > 100 ? info.substr(0, 100) : info}...
                 </Card.Text>
                 <Card.Text><b>Supplier: </b> {supplier}</Card.Text>
+                {email && <Card.Text><b>User's Email: </b> {email}</Card.Text>}
                 <div>
                     <Button onClick={() => navigate(`/inventory/${_id}`)} className='my-3 w-100' variant='outline-dark'>Update</Button>
                     {children}

@@ -13,6 +13,7 @@ const ManageProducts = () => {
     if (products?.length === 0) {
         return <Loading></Loading>
     }
+
     const deleteGpu = ([id, name]) => {
         const proceed = window.confirm(`Are you sure to delete "${name}"?`);
         if (proceed) {
@@ -24,24 +25,28 @@ const ManageProducts = () => {
         }
     }
     return (
-        <div className='m-5 d-flex'>
-            <div className='w-75'>
-                <Row className='g-3'>
-                    {
-                        products.map(gpu => <Col key={gpu._id} md={4}>
-                            <Product
-                                gpu={gpu}>
-                                {
-                                    (<Button variant='outline-danger w-100'
-                                        onClick={() => deleteGpu([gpu._id, gpu.name])}>Delete</Button>)
-                                }
-                            </Product></Col>)
-                    }
-                </Row>
+        <div className='m-5'>
+            <h2 className='boldPoppins text-center my-5'>Manage Inventory Products</h2>
+            <div className=' d-flex'>
+                <div className='w-75'>
+                    <Row className='g-3'>
+                        {
+                            products.map(gpu => <Col key={gpu._id} md={4}>
+                                <Product
+                                    gpu={gpu}>
+                                    {
+                                        (<Button variant='outline-danger w-100'
+                                            onClick={() => deleteGpu([gpu._id, gpu.name])}>Delete</Button>)
+                                    }
+                                </Product></Col>)
+                        }
+                    </Row>
+                </div>
+                <div className='w-25 text-center pt-4'>
+                    <Button onClick={() => navigate('/addProducts')} className='w-100 ms-4' variant='outline-dark'>Add Items</Button>
+                </div>
             </div>
-            <div className='w-25 text-center pt-4'>
-                <Button onClick={() => navigate('/addProducts')} className='w-100 ms-4' variant='outline-dark'>Add Items</Button>
-            </div>
+
 
         </div>
     );

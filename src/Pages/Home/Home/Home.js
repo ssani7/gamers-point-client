@@ -10,7 +10,7 @@ const Home = () => {
     return (
         <div>
             <Banner></Banner>
-            <div className='d-flex flex-column'>
+            <div className='d-flex flex-column align-items-center'>
                 <Products></Products>
                 <button onClick={() => navigate('/products/all')} className='btn btn-outline-dark my-4 mx-auto'>Show All</button>
                 <button onClick={() => navigate('/manageProducts')} className='btn btn-outline-dark mb-4 mx-auto'>Manage Inventory</button>

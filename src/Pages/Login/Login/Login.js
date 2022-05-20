@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FloatingLabel, Form } from 'react-bootstrap';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -16,6 +16,8 @@ const Login = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    const [email, setEmail] = useState('');
+
     const [
         signInWithEmailAndPassword,
         user,
@@ -23,19 +25,31 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
+    const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(
+        auth
+    );
+
     useEffect(() => {
         if (user) {
             navigate(from, { replace: true });
         }
     }, [user, navigate, from])
 
-    const onSubmit = async (data) => {
-        const email = data.email;
-        const password = data.password;
-
-        await signInWithEmailAndPassword(email, password);
-        navigate(from, { replace: true });
+    if (loading || sending) {
+        return <Loading></Loading>
     }
+
+    const onSubmit = async (data) => {
+        const password = data.password;
+        await signInWithEmailAndPassword(email, password);
+    }
+
+    const handlePassReset = async () => {
+        await sendPasswordResetEmail(email);
+        toast.success(`Password Reset Email sent to ${email}`);
+
+    }
+
     return (
         <div className='container mx-auto text-center mt-5'>
             <h2 className='mb-4'>Login</h2>
@@ -46,7 +60,12 @@ const Login = () => {
                     className="mb-3 "
                 >
                     <Form.Control type="email" className='' placeholder="name@example.com" {...register("email", {
-                        required: 'Email is required'
+                        required: 'Email is required',
+                        pattern: {
+                            value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                            message: 'Valid email is required'
+                        },
+                        onBlur: (e) => setEmail(e.target.value)
                     })} />
                 </FloatingLabel>
                 {errors?.email && <p className='text-danger'><small>{errors?.email?.message}</small></p>}
@@ -56,12 +75,15 @@ const Login = () => {
                     })} />
                 </FloatingLabel>
                 {errors?.password && <p className='text-danger'><small>{errors?.password?.message}</small></p>}
+                <p className='text-danger my-2'>{error?.message}</p>
                 {
-                    loading ? <Loading></Loading> : <input className='submit-btn mt-3 btn btn-outline-dark' type="submit" value="Sign In" />
+                    loading ? <Loading></Loading> : <input className='submit-btn mt-2 btn btn-outline-dark' type="submit" value="Sign In" />
                 }
+                <p className='d-flex align-items-center justify-content-center'>Forgot Password?<button onClick={handleSubmit(handlePassReset)} type="submit" class="btn btn-link">Click to reset Password</button></p>
             </form>
             <p className='mt-3'>New to Gamers Point? <Link to='/register'>Register</Link></p>
-            <p className='text-danger mt-2'>{error?.message}</p>
+
+
             <div className='divider w-50 mx-auto'><span>or</span></div>
             <SocialLogin from={from}></SocialLogin>
         </div>

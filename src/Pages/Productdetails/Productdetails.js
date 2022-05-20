@@ -9,7 +9,7 @@ const Productdetails = () => {
     const { id } = useParams()
     const [gpu, setGpu] = useState({});
     const [loading, setLoading] = useState(true);
-    const { _id, name, image, price, info, supplier } = gpu;
+    const { _id, name, image, price, info, supplier, email } = gpu;
     const [currentQuantity, setCurrentQuantity] = useState(0);
     const [currentSold, setCurrentSold] = useState(0);
 
@@ -86,8 +86,6 @@ const Productdetails = () => {
                 <p><b>Price: </b> {price?.toLocaleString('en-IN', { style: 'currency', currency: 'BDT', minimumFractionDigits: 2 })}</p>
                 <p><b>Quantity: </b> {currentQuantity}</p>
                 <p><b>Sold: </b> {currentSold}</p>
-                <p><b>Overview: </b> <span className='poppins'>{info}</span></p>
-                <p><b>Supplier: </b> {supplier}</p>
                 <Button variant='outline-dark mb-3' onClick={handleDelivered}>Delivered</Button>
                 <form onSubmit={handleAdd} className='d-flex align-items-center mb-3'>
                     <input name='add' type="number" className="form-control d-inline" placeholder="Restock Items" aria-label="Restock Items" aria-describedby="button-addon2" />
@@ -96,6 +94,9 @@ const Productdetails = () => {
                 <Link to='/manageProducts'>
                     <Button variant='outline-dark'>Manage Inventory</Button>
                 </Link>
+                <p className='mt-3'><b>Overview: </b> <span className='poppins'><small>{info}</small></span></p>
+                <p><b>Supplier: </b> {supplier}</p>
+                {email && <p><b>User's Email: </b> {email}</p>}
             </div>
         </div>
     );

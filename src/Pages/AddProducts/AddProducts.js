@@ -1,21 +1,24 @@
 import axios from 'axios';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import auth from '../../firebase.init';
 import './AddProduct.css'
 
 const AddProducts = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const [user] = useAuthState(auth);
 
-    const addProduct = data => {
-        const name = data.name;
-        const price = parseInt(data.price);
-        const quantity = parseInt(data.quantity);
-        const sold = parseInt(data.sold);
-        const info = data.info;
-        const supplier = data.supplier;
-        const image = data.image;
-        const email = data.image;
+    const addProduct = formData => {
+        const name = formData.name;
+        const price = parseInt(formData.price);
+        const quantity = parseInt(formData.quantity);
+        const sold = parseInt(formData.sold);
+        const info = formData.info;
+        const supplier = formData.supplier;
+        const image = formData.image;
+        const email = formData.email;
 
         const product = { email, name, price, quantity, sold, info, supplier, image }
 
@@ -24,8 +27,8 @@ const AddProducts = () => {
                 .then(res => {
                     const { data } = res;
                     if (data.insertedId) {
-                        toast.success(`Successfully Inserted ${name}`)
-                        data.reset()
+                        toast.success(`Successfully Inserted ${name}`);
+                        reset();
                     }
                 })
         }
@@ -65,10 +68,10 @@ const AddProducts = () => {
                 })} />
                 {errors?.sold && <p className='text-danger mb-1'><small>{errors?.sold?.message}</small></p>}
 
-                <textarea className='fs-5 pt-2' type="text" placeholder="Product Description" {...register("description", {
+                <textarea className='fs-5 pt-2' type="text" placeholder="Product Description" {...register("info", {
                     required: 'Product description is required'
                 })} />
-                {errors?.description && <p className='text-danger mb-1'><small>{errors?.description?.message}</small></p>}
+                {errors?.info && <p className='text-danger mb-1'><small>{errors?.info?.message}</small></p>}
 
                 <input type="text" placeholder="Supplier" {...register("supplier", {
                     required: 'Product supplier is required'
@@ -80,7 +83,7 @@ const AddProducts = () => {
                 })} />
                 {errors?.image && <p className='text-danger mb-1'><small>{errors?.image?.message}</small></p>}
 
-                <input type="email" placeholder="Email" {...register("email", {
+                <input type="email" placeholder="Email" readOnly value={user?.email} {...register("email", {
                     required: 'User email is required'
                 })} />
                 {errors?.email && <p className='text-danger mb-1'><small>{errors?.email?.message}</small></p>}
