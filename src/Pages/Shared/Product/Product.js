@@ -7,7 +7,7 @@ const Product = ({ gpu, children }) => {
     const { _id, image, name, info, price, quantity, supplier, sold, email } = gpu;
     const navigate = useNavigate();
     return (
-        <Card className='h-100'>
+        <Card className='h-100 shadow mb-5 bg-white rounded'>
             <Card.Img variant="top" src={image} />
             <Card.Body>
                 <Card.Title className='boldPoppins'>{name}</Card.Title>

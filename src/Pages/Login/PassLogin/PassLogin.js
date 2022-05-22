@@ -40,7 +40,7 @@ const PassLogin = () => {
         await createUserWithEmailAndPassword(email, password);
     }
     return (
-        <div className='mx-auto text-center my-5 w-50 shadow bg-white rounded'>
+        <div className='mx-auto text-center my-5 w-50 shadow-lg bg-white rounded'>
             <Card>
                 <Card.Body>
                     <Card.Title><h2 className='mb-4'>Sign Up</h2></Card.Title>

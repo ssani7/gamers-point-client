@@ -21,12 +21,13 @@ const Products = () => {
         <div>
             <div className='m-5 d-flex flex-column'>
                 <h2 className='boldPoppins text-center mb-5'> {length === 'all' ? 'All Inventory Products' : 'Available Products'} </h2>
-                <Row className='g-3'>
+                <Row className='g-4'>
                     {
                         gpus.map(gpu =>
                             <Col
                                 key={gpu._id}
-                                md={4}>
+                                md={6}
+                                lg={4}>
                                 <Product
                                     gpu={gpu}>
                                 </Product>

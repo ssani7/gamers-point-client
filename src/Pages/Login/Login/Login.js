@@ -54,7 +54,7 @@ const Login = () => {
     }
 
     return (
-        <div className='shadow mb-5 bg-white rounded mx-auto text-center mt-5 half-container'>
+        <div className='shadow-lg mb-5 bg-white rounded mx-auto text-center mt-5 half-container'>
             <Card>
                 <Card.Body>
                     <Card.Title><h2 className='mb-4'>Login</h2></Card.Title>
