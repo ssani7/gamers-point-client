@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../../Shared/Footer/Footer';
 import Products from '../../Shared/Products/Products';
 import Banner from '../Banner/Banner';
-import Footer from '../Footer/Footer';
 
 const Home = () => {
     const navigate = useNavigate();

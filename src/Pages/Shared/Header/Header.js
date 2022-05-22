@@ -11,12 +11,13 @@ const Header = () => {
     const handleSignOut = () => {
         const proceed = window.confirm("Are sure to log out?")
         if (proceed) {
-            signOut(auth)
+            signOut(auth);
+            localStorage.removeItem('accessToken');
         }
     }
     return (
-        <div className="sticky-top header">
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <div className="header">
+            <Navbar collapseOnSelect expand="lg" variant="dark">
                 <Container>
                     <Navbar.Brand as={Link} to='/home' className='header-logo fs-1'>Gamers Point</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />

@@ -1,19 +1,23 @@
 .customInput div {
-  max-width: 40vw;
+  max-width: 25vw;
   margin: 0 auto;
 }
 .submit-btn {
-  width: 40vw;
-  padding: 10px;
+  width: 25vw;
+  padding: 20px;
 }
 .divider {
   border-bottom: 1px solid #000;
   line-height: 0.1em;
-  margin: 30px 0;
+  max-width: 23vw;
 }
 .divider span {
   background: #fff;
   padding: 0 10px;
+}
+
+.half-container {
+  width: 50%;
 }
 
 @media only screen and (max-width: 991px) {
@@ -21,7 +25,11 @@
     max-width: 70vw;
   }
   .submit-btn {
-    width: 70vw;
+    width: 100%;
+  }
+
+  .divider {
+    max-width: 65vw;
   }
 }
 
@@ -31,5 +39,9 @@
   }
   .submit-btn {
     width: 100%;
+  }
+
+  .half-container {
+    width: 90%;
   }
 }

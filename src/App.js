@@ -3,7 +3,6 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home/Home/Home';
 import Products from './Pages/Shared/Products/Products';
-import Header from './Pages/Home/Header/Header';
 import Productdetails from './Pages/Productdetails/Productdetails';
 import ManageProducts from './Pages/ManageProducts/ManageProducts';
 import Login from './Pages/Login/Login/Login';
@@ -12,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import PassLogin from './Pages/Login/PassLogin/PassLogin';
 import RequireAuth from './Pages/Login/RequireAuth/RequireAuth';
 import UserProducts from './Pages/UserProducts/UserProducts';
+import Header from './Pages/Shared/Header/Header';
 
 function App() {
   return (

@@ -3,13 +3,16 @@ import { Button, Spinner } from 'react-bootstrap';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import useGetToken from '../../../hooks/useGetToken';
 import google from '../../../Images/google.png'
 
 const SocialLogin = ({ from }) => {
     const navigate = useNavigate();
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
-    if (user) {
+    const [token] = useGetToken(user);
+
+    if (token) {
         navigate(from, { replace: true });
     }
 
@@ -22,7 +25,7 @@ const SocialLogin = ({ from }) => {
             <Button
                 onClick={handleGsignIn}
                 variant="outline-dark"
-                className='submit-btn py-3 d-flex justify-content-center align-items-center mx-auto'>
+                className='submit-btn py-3 d-flex justify-content-center align-items-center mx-auto rounded'>
                 {loading
                     ? (<>
                         <Spinner animation="grow" className='me-4' /> Signing In Please Wait

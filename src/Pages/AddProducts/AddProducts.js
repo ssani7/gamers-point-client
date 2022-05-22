@@ -4,6 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
+import Footer from '../Shared/Footer/Footer';
 import './AddProduct.css'
 
 const AddProducts = () => {
@@ -23,12 +24,24 @@ const AddProducts = () => {
         const product = { email, name, price, quantity, sold, info, supplier, image }
 
         const addProductToDB = async () => {
-            await axios.post(`https://sheltered-hollows-42967.herokuapp.com/gpu`, product)
+            const config = {
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            }
+
+            await axios.post(`https://assignment-11-gpu-inventory.herokuapp.com/gpu`, product, config)
                 .then(res => {
                     const { data } = res;
                     if (data.insertedId) {
                         toast.success(`Successfully Inserted ${name}`);
                         reset();
+                    }
+                })
+                .catch(err => {
+                    if (err.response.status === 401 || err.response.status === 403) {
+                        toast.error(`You do not have access. Try logging in again`)
+                        return
                     }
                 })
         }
@@ -38,7 +51,7 @@ const AddProducts = () => {
     return (
         <div className='text-center add-product mt-3'>
             <h2 className='my-4'>Please Provide Product Information</h2>
-            <form onSubmit={handleSubmit(addProduct)} className='container mx-auto mt-3 customInputadd'>
+            <form onSubmit={handleSubmit(addProduct)} className='container mx-auto my-3 customInputadd'>
                 <input type="text" placeholder="Product Name" {...register("name", {
                     required: 'Product Name is required'
                 })} />
@@ -90,6 +103,8 @@ const AddProducts = () => {
 
                 <input className='mb-3 btn btn-outline-dark' type="submit" value="Add Product" />
             </form>
+
+            <Footer></Footer>
         </div>
     );
 };
