@@ -54,8 +54,8 @@ const Login = () => {
     }
 
     return (
-        <div className='shadow-lg mb-5 bg-white rounded mx-auto text-center mt-5 half-container'>
-            <Card>
+        <div className='bg-white mx-auto text-center mt-5 half-container'>
+            <Card className='py-5 p-md-5 shadow-lg border-0 rounded'>
                 <Card.Body>
                     <Card.Title><h2 className='mb-4'>Login</h2></Card.Title>
                     <form onSubmit={handleSubmit(onSubmit)} className='customInput'>
@@ -64,7 +64,7 @@ const Login = () => {
                             label="Email address"
                             className="mb-3 "
                         >
-                            <Form.Control type="email" className='' placeholder="name@example.com" {...register("email", {
+                            <Form.Control type="email" placeholder="name@example.com" {...register("email", {
                                 required: 'Email is required',
                                 pattern: {
                                     value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
@@ -75,7 +75,7 @@ const Login = () => {
                         </FloatingLabel>
                         {errors?.email && <p className='text-danger'><small>{errors?.email?.message}</small></p>}
                         <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3 ">
-                            <Form.Control type="password" className='' placeholder="Password" {...register("password", {
+                            <Form.Control type="password" placeholder="Password" {...register("password", {
                                 required: 'Password is required'
                             })} />
                         </FloatingLabel>

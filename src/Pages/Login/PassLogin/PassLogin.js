@@ -40,8 +40,8 @@ const PassLogin = () => {
         await createUserWithEmailAndPassword(email, password);
     }
     return (
-        <div className='mx-auto text-center my-5 w-50 shadow-lg bg-white rounded'>
-            <Card>
+        <div className='bg-white mx-auto text-center mt-5 half-container'>
+            <Card className='py-5 p-md-5 shadow-lg border-0 rounded'>
                 <Card.Body>
                     <Card.Title><h2 className='mb-4'>Sign Up</h2></Card.Title>
                     <form onSubmit={handleSubmit(onSubmit)} className='customInput'>

@@ -17,7 +17,7 @@
 }
 
 .half-container {
-  width: 50%;
+  width: fit-content;
 }
 
 @media only screen and (max-width: 991px) {

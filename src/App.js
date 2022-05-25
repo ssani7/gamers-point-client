@@ -43,6 +43,9 @@ function App() {
             <UserProducts></UserProducts>
           </RequireAuth>}>
         </Route>
+
+        <Route path='*' element={<Login />}></Route>
+
       </Routes>
       <ToastContainer />
     </div>
