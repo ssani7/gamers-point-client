@@ -16,29 +16,23 @@ const Summary = () => {
     console.log(totalQuantity, totalSold, totalProducts)
     return (
         <div className='h-50 py-5 px-5 grid text-center border '>
-            <Row>
-                <Col>
-                    <div>
-                        <h1><CountUp end={totalProducts}
-                            duration={2} /></h1>
-                        <h2>Different Products</h2>
-                    </div>
-                </Col>
-                <Col>
-                    <div>
-                        <h1><CountUp end={totalQuantity}
-                            duration={2} /></h1>
-                        <h2>Available Stock</h2>
-                    </div>
-                </Col>
-                <Col>
-                    <div>
-                        <h1><CountUp end={totalSold}
-                            duration={2} /></h1>
-                        <h2>Products Sold</h2>
-                    </div>
-                </Col>
-            </Row>
+            <div className='row'>
+                <div className='col-12 col-md-4 g-5'>
+                    <h1><CountUp end={totalProducts}
+                        duration={2} /></h1>
+                    <h2>Different Products</h2>
+                </div>
+                <div className='col-12 col-md-4 g-5'>
+                    <h1><CountUp end={totalQuantity}
+                        duration={2} /></h1>
+                    <h2>Available Stock</h2>
+                </div>
+                <div className='col-12 col-md-4 g-5'>
+                    <h1><CountUp end={totalSold}
+                        duration={2} /></h1>
+                    <h2>Products Sold</h2>
+                </div>
+            </div>
         </div>
     );
 };
