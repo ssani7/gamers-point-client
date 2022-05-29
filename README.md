@@ -1,6 +1,6 @@
 # Gamers Point
 
-[https://assignment11-gpu-incentory.web.app/](https://github.com/facebook/create-react-app).
+[https://assignment11-gpu-incentory.web.app/](https://assignment11-gpu-incentory.web.app/)
 
 # This is a warehouse management or inventory management webiste for graphics card
 
