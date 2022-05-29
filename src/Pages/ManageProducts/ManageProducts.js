@@ -49,7 +49,7 @@ const ManageProducts = () => {
                                     <Product
                                         gpu={gpu}>
                                         {
-                                            (<Button variant='outline-danger w-100'
+                                            (<Button variant='outline-danger mt-2 w-100'
                                                 onClick={() => deleteGpu([gpu._id, gpu.name])}>Delete</Button>)
                                         }
                                     </Product></Col>)

@@ -12,6 +12,7 @@ import PassLogin from './Pages/Login/PassLogin/PassLogin';
 import RequireAuth from './Pages/Login/RequireAuth/RequireAuth';
 import UserProducts from './Pages/UserProducts/UserProducts';
 import Header from './Pages/Shared/Header/Header';
+import NotFound from './Pages/Shared/NotFound/NotFound';
 
 function App() {
   return (
@@ -44,7 +45,7 @@ function App() {
           </RequireAuth>}>
         </Route>
 
-        <Route path='*' element={<Login />}></Route>
+        <Route path='*' element={<NotFound />}></Route>
 
       </Routes>
       <ToastContainer />

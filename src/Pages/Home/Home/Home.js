@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../../Shared/Footer/Footer';
 import Products from '../../Shared/Products/Products';
 import Banner from '../Banner/Banner';
+import Summary from '../Summary/Summary';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -10,6 +11,7 @@ const Home = () => {
     return (
         <div>
             <Banner></Banner>
+            <Summary></Summary>
             <div className='d-flex flex-column align-items-center'>
                 <Products></Products>
                 <button onClick={() => navigate('/products/all')} className='btn btn-outline-dark my-4 mx-auto'>Show All</button>

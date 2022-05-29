@@ -9,7 +9,7 @@ const Footer = () => {
             <section class="pt-3 text-white">
                 <div class="container text-center text-md-start mt-5">
                     <div class="row mt-3">
-                        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 text-center">
+                        <div class="col-4 col-md-3 col-lg-4 mx-auto mb-4 text-center">
                             <h6 class="text-uppercase fw-bold mb-4">
                                 Gamers Point
                             </h6>
@@ -18,7 +18,7 @@ const Footer = () => {
                             </p>
                         </div>
 
-                        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 text-center">
+                        <div class="col-4 col-md-2 col-lg-2 mx-auto mb-4 text-center">
                             {/* <!-- Links --> */}
                             <h6 class="text-uppercase fw-bold mb-4">
                                 Skills
@@ -37,7 +37,7 @@ const Footer = () => {
                             </p>
                         </div>
 
-                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 text-center">
+                        <div class="col-4 col-md-3 col-lg-2 mx-auto mb-4 text-center">
                             <h6 class="text-uppercase fw-bold mb-4">
                                 CSS Skills
                             </h6>
@@ -52,7 +52,7 @@ const Footer = () => {
                             </p>
                         </div>
 
-                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 text-center">
+                        <div class="col-12 col-md-4 col-lg-3 mx-auto mb-md-0 mb-4 text-center">
                             <h6 class="text-uppercase fw-bold mb-4">
                                 Contact
                             </h6>
