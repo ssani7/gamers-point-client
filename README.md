@@ -1,15 +1,13 @@
 # Gamers Point
 
-[https://assignment11-gpu-incentory.web.app/](https://assignment11-gpu-incentory.web.app/)
-
 # This is a warehouse management or inventory management webiste for graphics card
 
 Features of this webistes are
 
-- User can add, remove products easily and manage inventory
-
-- Other users can also add products, stocks and update information if they have account
-
-- This also shows the live update of the stock, sold and product list
-
+- User can have proper data about stocks, sell and price about the inventory
+- User can add, remove, update products to his inventory
+- Multiple users can add products to inventory and will have individual lists
 - This site has database so the data is secure and also the use informations
+
+[Live site](https://assignment11-gpu-incentory.web.app/) <br/>
+[server site repository](https://github.com/ssani7/gamers-point-server)
